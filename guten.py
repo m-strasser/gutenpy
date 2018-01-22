@@ -75,18 +75,23 @@ class Book:
             chapter = Chapter('Backtext', url)
             chapter.parse_paragraph(soup, url)
 
+
 class Chapter:
     """
     Stores information about a chapter.
     """
     def __init__(self, name, url, parent = None, prev_=None, next_=None, subchapters=[]):
         self.name = name
+        self.subtitle = None
         self.url = url
         self.subchapters = subchapters
         self.parent = parent
         self.prev = prev_
         self.next = next_
         self.paragraphs = []
+
+    def __repr__(self):
+        return '{}: {}'.format(self.name, self.subtitle)
 
     def parse_paragraph(self, soup, url, is_first=False):
         """
